@@ -1,0 +1,4 @@
+- Creare le servlet
+- Posizionare WebXMLGenerator.java nel package di default
+- Compilare
+- Controllare se tutto e' ok

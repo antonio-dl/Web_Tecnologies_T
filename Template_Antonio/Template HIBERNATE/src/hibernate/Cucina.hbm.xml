@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="hibernate.Cucina" table="cucine">
+		<id name="id" column="id"/>
+		<property name="nome" column="nome"/>
+		<property name="regione" column="regione"/>
+		<set name="ristoranti" table="ristoranti_cucine" inverse="false"
+			fetch="join" cascade="all">
+			<key column="ID_Ristorante"></key>
+			<many-to-many column="ID_Cucina"
+				class="hibernate.Ristorante" />
+		</set>
+	</class>
+</hibernate-mapping>
