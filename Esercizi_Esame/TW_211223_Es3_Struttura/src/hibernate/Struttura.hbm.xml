@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="hibernate.Struttura" table="strutture">
+		<id name="id" column="id" />
+		<property name="nome" column="nome" />
+		<property name="tipologia" column="tipologia" />
+		<property name="tipoResidenza" column="tipoResidenza" />
+		<property name="luogo" column="luogo" />
+		<set name="prenotazioni" table="prenotazioni" inverse="false"
+			fetch="join" lazy="true">
+			<key>
+				<column name="ID_Struttura"></column>
+			</key>
+			<one-to-many class="hibernate.Prenotazione" />
+		</set>
+
+		<set name="esperienze" table="strutture_esperienze" inverse="true"
+			fetch="join" cascade="all">
+			<key column="ID_Struttura"></key>
+			<many-to-many column="ID_Esperienza"
+				class="hibernate.Esperienza" />
+		</set>
+
+	</class>
+</hibernate-mapping>

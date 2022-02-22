@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="hibernate.Befana" table="befane">
+		<id name="id" column="id"/>
+		<property name="nomeBefana" column="nomeBefana"/>
+		<property name="colore" column="colore"/>
+		<property name="anni" column="anni"/>
+		<set name="calze" table="calze" inverse="false"
+			fetch="join" lazy="true">
+			<key>
+				<column name="befana_ID"></column>
+			</key>
+			<one-to-many class="hibernate.Calza" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,238 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
+
+public class #NOMECLASSEDAODB2# implements #NOMECLASSEDAO# 
+{
+	//statement metodi CRUD
+	
+		//INSERT 
+		#INSERT#
+		
+		//DELETE
+		#DELETE#
+
+		//UPDATE 
+		#UPDATE#
+		
+		//READ
+		#READ#	
+
+	// -------------------------------------------------------------------------------------
+
+		// create table
+		private static String create = 
+			#CREATE_TABLE#
+			;
+	
+		//drop table
+		#DROPTABLE#
+	
+			
+	
+	// === METODI DAO =========================================================================
+	
+	@Override
+	public void create( #NOMECLASSE# obj) {
+		
+		Connection conn = Db2DAOFactory.createConnection();
+		try 
+		{
+			PreparedStatement statement = conn.prepareStatement(insert);
+			statement.clearParameters();
+			
+			#INSERT_STATEMENTS#
+			
+			statement.executeUpdate();
+			
+			statement.close();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	// -------------------------------------------------------------------------------------
+
+	@Override
+	public #NOMECLASSE# read(long id) 
+	{
+		#NOMECLASSE# result = null;
+
+		if(id<0)  
+			return result;
+
+		Connection conn=Db2DAOFactory.createConnection();
+
+		try 
+		{
+			PreparedStatement statement=conn.prepareStatement(read_by_id);
+			statement.clearParameters();
+			statement.setLong(1, id);
+			ResultSet rs=statement.executeQuery();
+			
+			if(rs.next()) 
+			{
+				#NOMECLASSE# res = new #NOMECLASSE# ();
+				
+				#READ_STATEMENTS#
+				
+				result = res;
+			}
+
+			rs.close();
+			statement.close();
+		}
+
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			Db2DAOFactory.closeConnection(conn);
+		}
+
+		return result;
+	}
+
+	// -------------------------------------------------------------------------------------
+
+	@Override
+	public boolean update( #NOMECLASSE# obj) 
+	{
+		boolean result = false;
+		if (obj==null)  
+		{
+			return result;
+		}
+
+		Connection conn = Db2DAOFactory.createConnection();
+
+		try 
+		{
+			PreparedStatement statement=conn.prepareStatement(update);
+			statement.clearParameters();
+
+			#UPDATE_STATEMENTS#
+			
+			statement.executeUpdate();
+			result=true;
+			statement.close();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			Db2DAOFactory.closeConnection(conn);
+		}
+
+		return result;
+	}
+
+	// -------------------------------------------------------------------------------------
+
+	@Override
+	public boolean delete(long id) 
+	{
+		boolean result = false;
+		if (id<0)  
+		{
+			return result;
+		}
+
+		Connection conn=Db2DAOFactory.createConnection();
+
+		try 
+		{
+			PreparedStatement statement=conn.prepareStatement(delete);
+			statement.clearParameters();
+			statement.setLong(1,id);
+			statement.executeUpdate();
+			result = true;
+			statement.close();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			Db2DAOFactory.closeConnection(conn);
+		}
+
+		return result;
+	}
+
+	// -------------------------------------------------------------------------------------
+	
+	public boolean createTable() 
+	{
+		boolean result = false;
+		Connection conn = Db2DAOFactory.createConnection();
+		try 
+		{
+			Statement statement = conn.createStatement();
+			statement.execute(create);
+			result = true;
+			statement.close();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			Db2DAOFactory.closeConnection(conn);
+		}
+
+		return result;
+	}
+
+	// -------------------------------------------------------------------------------------
+
+	public boolean dropTable() 
+	{
+		boolean result=false;
+
+		Connection conn = Db2DAOFactory.createConnection();
+
+		try 
+		{
+
+			Statement stmt = conn.createStatement();
+			stmt.execute(drop);
+			result = true;
+			stmt.close();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		finally 
+		{
+			Db2DAOFactory.closeConnection(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	// Eventuali metodi aggiuntivi per l'esercizio
+	
+	
+	
+	
+}

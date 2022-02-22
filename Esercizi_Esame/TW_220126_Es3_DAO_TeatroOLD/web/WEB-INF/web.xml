@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>07_TecWeb_solved</display-name>
+    <description>
+      07_TecWeb_solved
+    </description>
+
+	<!-- Context attributes to be used throughout the application 
+			0 -> DB2;  1 -> HSQLDB;  2 -> MySQL 
+	-->
+	<context-param>
+		<param-name>dbType</param-name>
+		<param-value>0</param-value>
+	</context-param>
+	
+    <!-- Define servlets that are included in the application -->
+    <servlet>
+        <servlet-name>StillAServlet</servlet-name>
+        <servlet-class>it.unibo.tw.web.servlets.StillAServlet</servlet-class>
+        <init-param>
+        	<param-name>homeURL</param-name>
+        	<param-value>/pages/home.jsp</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StillAServlet</servlet-name>
+        <url-pattern>/stillAServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>it.unibo.tw.web.servlets.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/pages/checkout</url-pattern>
+    </servlet-mapping>
+
+	<!-- Welcome pages -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+		
+	<!-- Handle exceptions and errors -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/notfound.html</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>javax.servlet.ServletException</exception-type>
+		<location>/errors/failure.jsp</location>
+	</error-page>
+	 
+</web-app>

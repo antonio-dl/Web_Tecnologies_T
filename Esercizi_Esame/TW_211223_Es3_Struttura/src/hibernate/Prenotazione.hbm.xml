@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="hibernate.Prenotazione" table="prenotazioni">
+		<id name="id" column="id" />
+		<property name="nome" column="nome" />
+		<property name="dataArrivo" column="dataArrivo" />
+		<property name="dataPartenza" column="dataPartenza" />
+		<property name="numeroPersone" column="numeroPersone" />
+
+
+		<many-to-one name="struttura" class="hibernate.Struttura"
+			fetch="select">
+			<column name="ID_Struttura"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

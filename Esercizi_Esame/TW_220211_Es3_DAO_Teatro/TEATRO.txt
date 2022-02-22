@@ -1,0 +1,4 @@
+SpettacoloID: 0 Titolo:Nonnismo Tipologia: commedia Regista: Alberto Angela
+Nei teatri:
+TeatroID: 0 Nome Teatro = Ariston Citta': Bologna
+
